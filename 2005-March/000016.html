@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] OK, I signed up...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20OK%2C%20I%20signed%20up...&In-Reply-To=%3C4237CDC0.7050805%40comcast.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000015.html">
+   <LINK REL="Next"  HREF="000017.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] OK, I signed up...</H1>
+    <B>Scott Shawcroft</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20OK%2C%20I%20signed%20up...&In-Reply-To=%3C4237CDC0.7050805%40comcast.net%3E"
+       TITLE="[Denu-devel] OK, I signed up...">shux_linux at comcast.net
+       </A><BR>
+    <I>Wed Mar 16 07:10:08 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000015.html">[Denu-devel] interesting freedesktop thread
+</A></li>
+        <LI>Next message: <A HREF="000017.html">[Denu-devel] OK, I signed up...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#16">[ date ]</a>
+              <a href="thread.html#16">[ thread ]</a>
+              <a href="subject.html#16">[ subject ]</a>
+              <a href="author.html#16">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matt Kynaston wrote:
+
+&gt;&gt;<i>There you can see what denu supports.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Great. Do you know if any of the WMs support user-specified icons for
+</I>&gt;<i>folders? In Gnome/KDE that's set by the theme, so it's not part of the
+</I>&gt;<i>pyxdg stuff, but if anyone else uses them it'd be something we'd have
+</I>&gt;<i>to support. And how about Accelerator keys?
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>As far as I know, all of the window managers including Gnome/KDE its a 
+matter of absolute file names in the .directory files.  We'd also have 
+to look into supporting themes via .directory files because as of now 
+its just done by user definition.  Accelerator keys? Enlighten me.
+
+&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>Also, I also intend on using a glade definition to remove much of the
+</I>&gt;&gt;<i>gui definition from the code.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Was just reading up on those :)
+</I>&gt;<i>
+</I>&gt;<i>Mostly I've been cramming my head with all the Python I can. It's
+</I>&gt;<i>pretty cool, though structurally some stuff is pretty alien to me
+</I>&gt;<i>(where have all my curly braces gone?!)
+</I>&gt;<i>
+</I>&gt;<i>I'm gradually coming up with ideas for the menu classes I mentioned,
+</I>&gt;<i>but I'm still undecided whether they'd be best completely based on
+</I>&gt;<i>pyxdg or merely similar.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Python was a pretty smooth transition for me since I moved from PHP.
+
+&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>We also need to consider other window managers we want to support
+</I>&gt;&gt;<i>because some may not be worth it.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Dunno. I think if Denu catches on and we make extending it easy,
+</I>&gt;<i>people can contribute the load/save stuff for whatever WM they want.
+</I>&gt;<i>The trick is making sure that behind the scenes it can handle all
+</I>&gt;<i>menuing things a WM might reasonably throw at it.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Yes, and that will be a tough part.  An example would be fvwm because I 
+believe the menu config is kept with all of the other settings in one 
+file.  Another WM I need to look into further is e17.  I'm not sure how 
+menus are handled within it.  Do we also want to include support for 
+panels? Ex: pypanel, fbpanel.
+
+&gt;<i>Should each WM be a separately-installed module? That would allow each
+</I>&gt;<i>one to have it's own properties dialog for editing applications - ie
+</I>&gt;<i>if the WM didn't support icons, the user wouldn't see the option. Just
+</I>&gt;<i>a thought - not 100% how to implement something like that.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>I think that a separate module is okay, such as it is now.  However, I 
+think that a separate properties box is misleading/not possible with the 
+current code because the WM being used is not detected by denu, the user 
+selects which WM to generate for.
+
+&gt;<i>What's your sense about the acceptance of the freedesktop.org spec -
+</I>&gt;<i>do you think other WMs will migrate to it eventually?
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Good question.  My gut says eventually yes, but it will not be urgent.  
+I say that because the text files, especially the xml ones are really 
+easy to work with.  To say where its headed I'd say look at Xfce4, the 
+user has the option to use the freedesktop spec if they want.  Or the 
+user can just use the xml file.  What the freedesktop standards do is 
+not only standardize the menus in gnome and KDE but also shifts the 
+responsibility of including a program in the menu from the window 
+manager to the developer/packager of the program.  I know that this is 
+especially apparent now as the standard is just now introduced. 
+
+I think that the single text file is not going to be obsolete for 
+another reason.  The power user.  I know for a fact that not all users 
+like GUI menu editors.  Look at this poll I posted originally when I 
+started denu. 
+<A HREF="http://forums.gentoo.org/viewtopic-t-218634-highlight-denu.html">http://forums.gentoo.org/viewtopic-t-218634-highlight-denu.html</A>
+11 users, 14% said its easy enough to edit by hand.  With the 
+introduction of the freedesktop spec menu editing by hand is not easy. 
+Period.  Program information is stored in .desktop files, directory 
+information in .directory files and brought together by one or multiple 
+.menu files.  This does not cater to those who do hand config.
+
+&gt;<i>Certainly seems to be having a few teething trouble with the latest
+</I>&gt;<i>KDE and Gnomes anyway ;)
+</I>&gt;<i>
+</I>&gt;<i>Matt
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>    Overall, I think the freedesktop specs create a better environment 
+for new users and a more frustrating one for power users.  The specs 
+solve problems apparent with many menu generation programs because the 
+management is left to the package manager/the developer.  These problems 
+include missing a program, having a wrong bit of information and in the 
+case of editing by hand, not knowing what the executable(s) were named. 
+
+    My response to these drawbacks was denu and it compensates for 
+missing programs by being able to add them to denu which in turn submits 
+it to the online database so the next time someone has the program it 
+wont be missing.  This update via the internet also allows for 
+'definitions' to be updated separate from the program, no emerge -u denu 
+for a program update.  The definitions ability to be updated also allows 
+the menu to update according to information. (However once an entry is 
+in the menu portion it is untouched by denu and only edited by the 
+user.)  The definitions also make knowing the executable not required.  
+One only needs to know that in the case a program is not in the database.
+
+    Another advantage of denu, since I'm on that, for gentooers is that 
+it shows all programs that have a potential to be in a menu even if its 
+not in the world file.
+
+Thats a lot.  Thanks for your help.
+~Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000015.html">[Denu-devel] interesting freedesktop thread
+</A></li>
+	<LI>Next message: <A HREF="000017.html">[Denu-devel] OK, I signed up...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#16">[ date ]</a>
+              <a href="thread.html#16">[ thread ]</a>
+              <a href="subject.html#16">[ subject ]</a>
+              <a href="author.html#16">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>

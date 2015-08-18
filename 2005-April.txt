@@ -1,0 +1,261 @@
+From shux_linux at comcast.net  Fri Apr  1 02:08:08 2005
+From: shux_linux at comcast.net (Scott Shawcroft)
+Date: Thu, 31 Mar 2005 16:08:08 -0800
+Subject: [Denu-devel] Other Gnome 2.10 menu project and personal update.
+Message-ID: <424C90E8.6030801@comcast.net>
+
+Here is a link to a new editor for gnome 2.10.  Its more similar to a
+menu editor such as kmenuedit.  Denu is still in its own league.  Check
+it out here, http://ubuntuforums.org/forumdisplay.php?f=67 .
+
+As of denu 3.x development its in the back of my mind and I have to
+leave it there.  I have an English paper due on Tuesday and then I go to
+Southern California on a choir trip.  My goal is to get the gui set and
+the classes and variables etc. defined and then go in and code the
+functions.  It is also going to include server-side changes to an xml
+format for the database also.  If you guys have any ideas on this data
+transfer let me know.
+Thanks,
+Scott
+
+
+From mattkyn at gmail.com  Fri Apr  1 12:04:20 2005
+From: mattkyn at gmail.com (Matt Kynaston)
+Date: Fri, 1 Apr 2005 11:04:20 +0100
+Subject: [Denu-devel] Other Gnome 2.10 menu project and personal update.
+In-Reply-To: <424C90E8.6030801@comcast.net>
+References: <424C90E8.6030801@comcast.net>
+Message-ID: <e7ba781d0504010204337cf66d@mail.gmail.com>
+
+On Apr 1, 2005 1:08 AM, Scott Shawcroft <shux_linux at comcast.net> wrote:
+> Here is a link to a new editor for gnome 2.10.  Its more similar to a
+> menu editor such as kmenuedit.  Denu is still in its own league.  Check
+> it out here, http://ubuntuforums.org/forumdisplay.php?f=67 .
+
+Yah - I did an ebuild for the 0.1 version a while back, but haven't checked 0.2:
+http://bugs.gentoo.org/show_bug.cgi?id=85019
+
+> As of denu 3.x development its in the back of my mind and I have to
+> leave it there.  I have an English paper due on Tuesday and then I go to
+> Southern California on a choir trip.
+
+OK, I'll do my best to get the promised WM classes across this
+weekend. It's been fairly hectic for me since Easter :(
+
+> It is also going to include server-side changes to an xml
+> format for the database also.  If you guys have any ideas on this data
+> transfer let me know.
+
+How do the updates work currently on the server side?
+
+Matt
+
+
+From mattkyn at gmail.com  Mon Apr  4 13:43:06 2005
+From: mattkyn at gmail.com (Matt Kynaston)
+Date: Mon, 4 Apr 2005 12:43:06 +0100
+Subject: [Denu-devel] [Fwd: Denu 3.x Planned Classes and Functions]
+In-Reply-To: <424F4873.9040102@comcast.net>
+References: <424F4873.9040102@comcast.net>
+Message-ID: <e7ba781d05040404431c9f2ec9@mail.gmail.com>
+
+I'm confused! Which list should I be replying to?
+
+Matt
+
+On Apr 3, 2005 2:35 AM, Scott Shawcroft <shux_linux at comcast.net> wrote:
+>  
+>  
+>  -------- Original Message -------- 
+>  Subject: Denu 3.x Planned Classes and Functions 
+>  Date: Sat, 02 Apr 2005 10:11:45 -0800 
+>  From: Scott Shawcroft <shux_linux at comcast.net> 
+>  To: denu-devel <denu-devel at lists.berlios.de> 
+>  
+>  Here is a copy of what I came up with last night.
+> 
+> _*libDenu*_ - Deals with XML manipulation and import export.
+> editEntry
+> viewEntry
+> addEntry
+> deleteEntry
+> addSpecial
+> addFolder
+> save
+> open
+> autoFill
+> update
+> sysupdate
+> saveEntry
+> saveSpecial
+> moveEntry
+> import
+> export
+> getWM
+> getInstalledWMs
+> backup
+> 
+> *_denuGUI_*
+> pixmap-manager
+> initialize
+> closeWindow
+> closeDenu
+> about
+> loadConfig
+> saveConfig
+> openWindow
+> (More needed in here)
+> *_
+> denu-wm_* - wm replaced with name of window manager name.
+> import
+> export
+> getVersion
+> 
+> Here are some goals for 3.x:
+> Document all...
+>  functions
+>  classes
+>  variables
+> Friendly GUI
+> command-line interface ?
+> modular
+> tooltips
+> help section
+> documentation
+> simple interface
+> user levels?
+>  -Beginner
+>  -Intermediate
+>  -Advanced
+> 
+> Please keep this list intact. Add stuff if necessary and and
+> comments/questions to the bottom of the list.
+> 
+> Thanks,
+> Scott
+> 
+> 
+> 
+>  ------------------------------------------------------- SF
+> email is sponsored by - The IT Product Guide Read honest & candid reviews on
+> hundreds of IT Products from real users. Discover which products truly live
+> up to the hype. Start reading now.
+> http://ads.osdn.com/?ad_id=6595&alloc_id=14396&op=click
+> _______________________________________________ Denu-devel
+> mailing list Denu-devel at lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/denu-devel
+
+
+From mattkyn at gmail.com  Mon Apr 25 14:00:21 2005
+From: mattkyn at gmail.com (Matt Kynaston)
+Date: Mon, 25 Apr 2005 13:00:21 +0100
+Subject: [Denu-devel] Re: cross wm-menu managing
+In-Reply-To: <1114427066.4014.232636994@webmail.messagingengine.com>
+References: <1114427066.4014.232636994@webmail.messagingengine.com>
+Message-ID: <e7ba781d05042505003ff29efc@mail.gmail.com>
+
+Hi Niklas,
+
+I'm still working on the pyxdg editor - it basically works, but I'm
+getting pretty bogged down with other stuff, and the pyxdg author is
+in a similar position and hasn't committed my changes. But I'm always
+happy to share code :D
+
+My aim is to integrate it with Denu, another cross-wm menu editor:
+Denu's actively looking for contributors right now - hope you don't
+mind me CC-ing this to their list.
+
+Matt
+
+On 4/25/05, Niklas Paro <hiower4 at elitemail.org> wrote:
+> Hello!
+> 
+> I've been thinking about developing a cross wm menu managing tool.
+> I have a fairly simple tool already using pyxdg to create fvwm menus
+> from the desktop entries. As I read this mail:
+> http://lists.freedesktop.org/archives/xdg/2005-March/006247.html ,
+> I figured we could do a coordinated effort. I'm at least interesting in
+> contributing if you already have something going. If you're interested
+> I can mail you what I have got so far.
+> 
+> regards,
+> 
+> Niklas Paro
+> --
+>   Niklas Paro
+>   hiower4 at elitemail.org
+> 
+>
+
+
+From hiower4 at elitemail.org  Mon Apr 25 18:35:20 2005
+From: hiower4 at elitemail.org (nicke)
+Date: Mon, 25 Apr 2005 19:35:20 +0300
+Subject: [Denu-devel] Re: cross wm-menu managing
+In-Reply-To: <e7ba781d05042505003ff29efc@mail.gmail.com>
+References: <1114427066.4014.232636994@webmail.messagingengine.com>
+	<e7ba781d05042505003ff29efc@mail.gmail.com>
+Message-ID: <20050425193520.7542d26d@nadir>
+
+Hello
+
+What a coincidence, I actually planned calling my program DMenu, or
+DMenus... And no, I don't mind your CC-ing, however, Denu doesn't either
+seem to be the kind of project that I searched for. What I planned was
+this:
+
+* Provide some sort of a default system-wide applications.menu file
+which include all possible categories.
+
+* Generate menus with a simple command, that can be included for example
+in .xinit, so that users always will have up-to-date menus.
+
+As I understand it, you want to create a gui program to manipulate
+applications.menu files, which of course also is needed. The thing is, I
+do not feel a need for a gui.
+
+About the name... this is the primary reason i forward this mail to the
+Denu mailing-list; what do you think, would it be okay that I call my
+program DMenu (for Desktop Menu), or should I come up with something
+different? There is a chance that people would mix the names...
+
+Kindly answer directly to this my email when you have come to a
+conclusion, as I'm not registered.
+
+On Mon, 25 Apr 2005 13:00:21 +0100
+Matt Kynaston <mattkyn at gmail.com> wrote:
+
+> Hi Niklas,
+> 
+> I'm still working on the pyxdg editor - it basically works, but I'm
+> getting pretty bogged down with other stuff, and the pyxdg author is
+> in a similar position and hasn't committed my changes. But I'm always
+> happy to share code :D
+> 
+> My aim is to integrate it with Denu, another cross-wm menu editor:
+> Denu's actively looking for contributors right now - hope you don't
+> mind me CC-ing this to their list.
+> 
+> Matt
+> 
+> On 4/25/05, Niklas Paro <hiower4 at elitemail.org> wrote:
+> > Hello!
+> > 
+> > I've been thinking about developing a cross wm menu managing tool.
+> > I have a fairly simple tool already using pyxdg to create fvwm menus
+> > from the desktop entries. As I read this mail:
+> > http://lists.freedesktop.org/archives/xdg/2005-March/006247.html ,
+> > I figured we could do a coordinated effort. I'm at least interesting in
+> > contributing if you already have something going. If you're interested
+> > I can mail you what I have got so far.
+> > 
+> > regards,
+> > 
+> > Niklas Paro
+> > --
+> >   Niklas Paro
+> >   hiower4 at elitemail.org
+> > 
+> >
+
+

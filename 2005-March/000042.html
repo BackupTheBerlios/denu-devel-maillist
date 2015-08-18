@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] Internal Format
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20Internal%20Format&In-Reply-To=%3Ce7ba781d05032601397bac7a3e%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000041.html">
+   <LINK REL="Next"  HREF="000043.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] Internal Format</H1>
+    <B>Matt Kynaston</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20Internal%20Format&In-Reply-To=%3Ce7ba781d05032601397bac7a3e%40mail.gmail.com%3E"
+       TITLE="[Denu-devel] Internal Format">mattkyn at gmail.com
+       </A><BR>
+    <I>Sat Mar 26 10:39:17 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000041.html">[Denu-devel] Internal Format
+</A></li>
+        <LI>Next message: <A HREF="000043.html">[Denu-devel] Two more things...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#42">[ date ]</a>
+              <a href="thread.html#42">[ thread ]</a>
+              <a href="subject.html#42">[ subject ]</a>
+              <a href="author.html#42">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 25 Mar 2005 18:45:26 -0800, Scott Shawcroft
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">shux_linux at comcast.net</A>&gt; wrote:
+&gt;<i> Matt,
+</I>&gt;<i> How do we want to store the menu within denu.  Should we store it
+</I>&gt;<i> similar to it is now?  Should we keep two concurrent versions, one XML
+</I>&gt;<i> one for the treeestore?  I think import/exporting to XML will work.
+</I>
+No? Any particular reason?
+
+Like I tried to say before, the problem with the current TreeStore is
+that it I don't see think it will be very flexible when it comes to
+handling variable amounts of data. You've basically got a structure
+something like at table (sorry for the bad ascii art):
+
++-------------------------------+--------+--------------+-----------+------------+
+
+|<i> Icon                          | Name   | Executable   | Comment   |
+</I>Name[es]   |
++-------------------------------+--------+--------------+-----------+------------+
+|<i> /usr/share/pixmaps/folder.svg | Apps   |              |           | 
+</I>          |
++-------------------------------+--------+--------------+-----------+------------+
+
+|<i> /usr/share/pixmaps/app.svg    | My App | /usr/bin/app | Nice prog |
+</I>Hola mundo |
++-------------------------------+--------+--------------+-----------+------------+
+
+If you want to add a Name[de] column (or anything else) every item in
+the table has to be expanded.
+
+With hierarchical structures, you don't have that problem. In XML, the
+above could look something like:
+
+&lt;menu name=&quot;Apps&quot;&gt;
+  &lt;app name=&quot;My App&quot; executable=&quot;/usr/bin/app&quot;&gt;
+    &lt;icon&gt;/usr/share/pixmaps/app.svg&lt;/icon&gt;
+    &lt;comment&gt;Nice prog&lt;/comment&gt;
+    &lt;name xml:lang=&quot;es&quot;&gt;Hola Mundo&lt;/name&gt;
+  &lt;/app&gt;
+  &lt;menu name=&quot;Submenu&quot;&gt;
+     &lt;!-- more stuff --&gt;
+  &lt;/menu&gt;
+&lt;/menu&gt;
+
+You can just keep adding stuff inside the &lt;menu&gt; and &lt;app&gt; tags
+without breaking the original structure.
+
+You could also do the same thing with objects:
+
+class Menu:
+    parent = None
+    name = ''
+    icon = ''
+    apps = []
+    submenus = []
+
+class App:
+    parent = None
+    name = ''
+    icon = ''
+    comment = ''
+    name_loc = []
+
+mymenu = Menu()
+mymenu.name = 'Apps'
+mymenu.icon = '/usr/share/pixmaps/folder.svg'
+
+myapp = App()
+myapp.name = 'My App'
+myapp.icon = '/usr/share/pixmaps'
+myapp.comment = 'Nice prog'
+myapp.name_loc['es'] = 'Hola mundo'
+myapp.parent = mymenu
+
+mymenu.children.append(myapp)
+
+In many ways, the XML and object approach are identical, since python
+converts the XML to a tree of objects when it's parsed. The only
+practical difference is that one would be stored as a human-readable
+text file, the other as not-so-readable cPickle object.
+
+Anyway, sun is shining and I'm off down to my brother's boat for the
+first sail of the season :) I'd hoped to finally get the pyxdg stuff
+out the door before I left. It's nearly there, but every time I turn
+around it bites me somewhere new :| Back Tues.
+
+Happy Easter!
+
+Matt
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000041.html">[Denu-devel] Internal Format
+</A></li>
+	<LI>Next message: <A HREF="000043.html">[Denu-devel] Two more things...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#42">[ date ]</a>
+              <a href="thread.html#42">[ thread ]</a>
+              <a href="subject.html#42">[ subject ]</a>
+              <a href="author.html#42">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>

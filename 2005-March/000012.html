@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] OK, I signed up...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20OK%2C%20I%20signed%20up...&In-Reply-To=%3C423541F6.6000205%40comcast.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000011.html">
+   <LINK REL="Next"  HREF="000013.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] OK, I signed up...</H1>
+    <B>Scott Shawcroft</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20OK%2C%20I%20signed%20up...&In-Reply-To=%3C423541F6.6000205%40comcast.net%3E"
+       TITLE="[Denu-devel] OK, I signed up...">shux_linux at comcast.net
+       </A><BR>
+    <I>Mon Mar 14 08:49:10 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000011.html">[Denu-devel] OK, I signed up...
+</A></li>
+        <LI>Next message: <A HREF="000013.html">[Denu-devel] =?GB2312?B?gUaBYInviPWCzIpGl2yC1oLMgrKIxJPggWA=?=
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matt Kynaston wrote:
+
+&gt;<i>Hola!
+</I>&gt;<i>
+</I>&gt;<i>Not quite sure what I'm doing here, except I was bugging you lots on
+</I>&gt;<i>the gentoo forums.
+</I>&gt;<i>
+</I>&gt;<i>I think Denu has real potential - a menu editor that makes it easy to
+</I>&gt;<i>take your setup from one WM to another has got to be a winner.
+</I>&gt;<i>
+</I>&gt;<i>But I've got pretty dogmatic UI ideas. When I fire it up first time, I
+</I>&gt;<i>want to see the existing menu for the WM I'm currently running as a
+</I>&gt;<i>tree structure. Then I want to right-click on things to add, edit and
+</I>&gt;<i>delete. I want a File &gt; Import menu item to let me suck in the menu
+</I>&gt;<i>from another WM, and a File &gt; Export to save them for another WM.
+</I>&gt;<i>
+</I>&gt;<i>Tell me to piss off if you don't agree.
+</I>&gt;<i>
+</I>&gt;<i>Backend-wise that core shouldn't be difficult. Internally for Denu the
+</I>&gt;<i>menu itself is just an object tree: once the API for that's sorted and
+</I>&gt;<i>the UI is working, all the work is writing the import/export
+</I>&gt;<i>functions. And from what I can tell, you've gone a long way to getting
+</I>&gt;<i>that part down. Make that part modular and other people will find it
+</I>&gt;<i>easy to contribute a plugin for their wm-de-jour.
+</I>&gt;<i>
+</I>&gt;<i>I'm only just getting my head round the freedesktop.org menuing spec.
+</I>&gt;<i>Like most specs, it stinks of being written by a committee. But that
+</I>&gt;<i>doesn't make it bad - if the internal object model of Denu supports
+</I>&gt;<i>that, with all it's OnlyIn and Exclude crap, you know it will support
+</I>&gt;<i>just about anything another WM could throw at it.
+</I>&gt;<i>
+</I>&gt;<i>Right now I'm between freelance gigs. I'm happy to brainstorm and do
+</I>&gt;<i>stuff while that lasts. Like I said on one of my posts, I'm a
+</I>&gt;<i>programmer, but not a python programmer. But from what I've seen from
+</I>&gt;<i>the pyxdg sample scripts though, this stuff just doesn't look
+</I>&gt;<i>impossible.
+</I>&gt;<i>
+</I>&gt;<i>Anyway, let me know what your thoughts for Denu are.
+</I>&gt;<i>
+</I>&gt;<i>Matt
+</I>&gt;<i>_______________________________________________
+</I>&gt;<i>Denu-devel mailing list
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">Denu-devel at lists.berlios.de</A>
+</I>&gt;<i><A HREF="http://lists.berlios.de/mailman/listinfo/denu-devel">http://lists.berlios.de/mailman/listinfo/denu-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Matt,
+I cannot express my gratitude for your criticism.  I agree that denu has 
+a lot of potential.  Your ideas are very good ones.  The core of denu is 
+in place (besides the import function) and its a matter now of focussing 
+on the UI of denu.  I like the idea of it automatically importing the 
+current menu.  There is pontential in that idea. 
+
+However, I think that you are discounting how tough the import/export 
+functions are to get right.  The idea of modularization is already 
+present.  If you look in /usr/share/denu/wm you will see the files.  The 
+tough part comes in the different styles menus are saved.  The majority 
+of window managers use a single text file, example openbox/fluxbox. 
+Others use a single text file for all of the configs, keybindings etc. 
+example waimea (I believe).  Then there is the desktop menu spec in 
+which the menu is generated from .desktop files in combination with a 
+file which specifies categories and what to include and not include.  
+examples gnome/kde(as of 3.4)  Xfce4 on the other hand is a combination 
+of the two, its menu is stored in a file and all of the menu entry's 
+info can be stored in that file or a simple tag can be added to include 
+the desktop menu spec generated menu.  Enlightenment 16 stores its menus 
+by keeping a menu file for each directory in the menu and then combining 
+the files.  I think you get my point.  What it boils down to is three 
+types, directory structured, file based and freedesktop spec.
+
+Now the freedesktop spec has a wrinkle that need sto be ironed out in 
+the way it determines order.  For each directory a &lt;layout&gt; tag must be 
+included to order the entries.  This definition is separate from the 
+&lt;include&gt; tag to include files.
+
+Now don't discount yourself because you seem to be more of a 
+programmer.  I'm a self taught programmer and denu is my first venture 
+into python. I know I shouldn't admit that but it is.  Since I'm going 
+to admit that I might as well state that I'm an 18 year old high school 
+senior.  Ah, the wonders of the internet.  With that aside I put alot of 
+time, generally in chunks into denu and intend to continue working on it 
+because its an itch I thought needed to be scratched.  None of the other 
+menu generation programs were up to snuff.
+
+Also, a note.  If anyone happens to be a real/more experienced 
+programmer than I and you read this (probably in the future) please 
+critique my code.  Like I said I wrote denu as first of the language 
+project.  Its main purpose is to learn from.
+
+Thanks,
+Scott
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000011.html">[Denu-devel] OK, I signed up...
+</A></li>
+	<LI>Next message: <A HREF="000013.html">[Denu-devel] =?GB2312?B?gUaBYInviPWCzIpGl2yC1oLMgrKIxJPggWA=?=
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#12">[ date ]</a>
+              <a href="thread.html#12">[ thread ]</a>
+              <a href="subject.html#12">[ subject ]</a>
+              <a href="author.html#12">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>

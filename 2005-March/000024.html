@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] RFC: Modularizing WM Functionality
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20RFC%3A%20Modularizing%20WM%20Functionality&In-Reply-To=%3Ce7ba781d05031701574bad79b9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000022.html">
+   <LINK REL="Next"  HREF="000025.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] RFC: Modularizing WM Functionality</H1>
+    <B>Matt Kynaston</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20RFC%3A%20Modularizing%20WM%20Functionality&In-Reply-To=%3Ce7ba781d05031701574bad79b9%40mail.gmail.com%3E"
+       TITLE="[Denu-devel] RFC: Modularizing WM Functionality">mattkyn at gmail.com
+       </A><BR>
+    <I>Thu Mar 17 10:57:39 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000022.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+        <LI>Next message: <A HREF="000025.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#24">[ date ]</a>
+              <a href="thread.html#24">[ thread ]</a>
+              <a href="subject.html#24">[ subject ]</a>
+              <a href="author.html#24">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 16 Mar 2005 18:17:46 -0800, Scott Shawcroft
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">shux_linux at comcast.net</A>&gt; wrote:
+
+&gt;<i> Alright, so the next question is what actions to we need to cover and
+</I>&gt;<i> how will the core look.
+</I>
+Well, there's nothing in the core right now that loads menus from the
+WM, only from Denu's own saved menu.
+
+I guess that needs to be addressed: if we're doing a major rewrite,
+will Denu continue to keep it's own version of the menu saved, or will
+it work natively with the menu of the currently running WM, exporting
+that to different formats at the user's request?
+
+For BC, I think we'll need a 'Denu' WM class, that loads and saves the
+~/.denu/lastmenu.p. The  real question is whether there's anything to
+be gained by keeping our own copy of the menus in future... I suspect
+there is, but am not thinking well enough right now to say what it is
+:|<i>
+</I>
+&gt;<i> Also, along with this major rewrite we also
+</I>&gt;<i> should change to using glade.  Would each module be a separate package?
+</I>
+Do you mean, would a WM include glade files? Might be wrong, but there
+shouldn't be any UI stuff attached to a WM, should there?
+
+&gt;<i> How would denu know what WMs are supported?
+</I>
+We need two things: a module install script, and a simple registry
+that gets pickled and loaded at program startup. It will contain a
+list of the installed WMs and their capabilities, I was thinking
+something like:
+    registry = {'Gnome' : {[stuff about gnome]}, 'FluxBox' : {[stuff
+about fluxbox]}}
+
+The install script is pretty simple. It:
+    1. instantiates the WM class
+    2. finds out it's name, capabilities, etc
+    3. copies them to the registry
+    4. saves the registry
+
+I could either be a separate script, or done with something like:
+
+    $ denu --install-module /path/to/wm_module.py
+
+Prob separate would be simpler, since we don't want it firing up the GUI.
+
+More suggestions for methods the WM classes might need to support
+(thinking out load):
+
+I think in addition to capabilities, we'll need a property called
+'signature'. This is the process we look for to detect if that WM is
+running. So for Gnome:
+
+    wm.signature = 'gnome-session'
+
+That should also get copied to the registry on install, to avoid the
+overhead of instantiating every WM module at startup.
+
+We might also want:
+
+   wm.system_commands = {'About' : '[command,icon,etc]', 'Help' :
+'[command,etc]', ...}
+
+This could be used for populating a WM-specific 'specials' box.
+Doesn't need to be in the registry, though.
+
+My method list:
+
+    wm.load()
+    wm.save(menu)
+    wm.getName()                  # needed by the installer
+    wm.getIconThemePath()   # would only be needed if we were going to use
+                                              # the current theme's
+own folder/app icons
+                                              # in Denu's UI
+
+I'll bang out a working version of the WM class along with some test
+scripts and send 'em over so we can start playing with it - it's
+always much easier to understand when there's something functioning
+there.
+
+I've just had a couple of small jobs crop up, though, so might not get
+to it until end of the weekend.
+
+I've also contacted the pyxdg developer about working together on the
+editing functionality for that. He's right, it's not exactly a trivial
+task, but helping develop that will help Denu deal with Gnome and KDE
+too.
+
+Is there any way to make <A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">denu-devel at lists.berlios.de</A> automatically
+make the 'Reply-To' go to the list, is there? I keep forgetting...
+
+Matt
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000022.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+	<LI>Next message: <A HREF="000025.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#24">[ date ]</a>
+              <a href="thread.html#24">[ thread ]</a>
+              <a href="subject.html#24">[ subject ]</a>
+              <a href="author.html#24">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>

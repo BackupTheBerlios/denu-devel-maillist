@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] Denu in portage.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20Denu%20in%20portage.&In-Reply-To=%3C42421219.6040405%40comcast.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000032.html">
+   <LINK REL="Next"  HREF="000034.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] Denu in portage.</H1>
+    <B>Scott Shawcroft</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20Denu%20in%20portage.&In-Reply-To=%3C42421219.6040405%40comcast.net%3E"
+       TITLE="[Denu-devel] Denu in portage.">shux_linux at comcast.net
+       </A><BR>
+    <I>Thu Mar 24 02:04:25 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000032.html">[Denu-devel] Denu in portage.
+</A></li>
+        <LI>Next message: <A HREF="000034.html">[Denu-devel] Denu 3.x Todo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#33">[ date ]</a>
+              <a href="thread.html#33">[ thread ]</a>
+              <a href="subject.html#33">[ subject ]</a>
+              <a href="author.html#33">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matt Kynaston wrote:
+
+&gt;<i>On Mon, 21 Mar 2005 15:56:44 -0800, Scott Shawcroft
+</I>&gt;<i>&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">shux_linux at comcast.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>I say that because if you look at the generated menu file by denu for
+</I>&gt;&gt;<i>that spec it is sloppy.  It includes multiple
+</I>&gt;&gt;<i>&lt;Include&gt;&lt;Filename&gt;file&lt;/Filename&gt;&lt;/Include&gt;.  What we need to decide is
+</I>&gt;&gt;<i>if we want to take that approach or follow one more along the lines of
+</I>&gt;&gt;<i>KDE and Gnome.  They use include exclude also but not per filename.
+</I>&gt;&gt;<i>More accurately Gnome/KDE use the base, 'include everything with x
+</I>&gt;&gt;<i>category in folder x' while denu has it just include a file in its
+</I>&gt;&gt;<i>structure.  The way denu does it now seems to have more control over the
+</I>&gt;&gt;<i>actual contents of the menu versus the other method.  
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Get your point. The freedesktop spec was designed for building
+</I>&gt;<i>system-wide menus. It's actually pretty clever - when an application
+</I>&gt;<i>installs itself it just has to drop files in specified locations and
+</I>&gt;<i>it gets incorporated into the menu where ever the user likes that kind
+</I>&gt;<i>of app. The complexity of the spec comes from that requirement, and
+</I>&gt;<i>menu editing is a bit of an afterthought - to the point where it
+</I>&gt;<i>wasn't until a month ago that a common 'user menu' file location was
+</I>&gt;<i>decided on (which KDE 3.4's kmenuedit still does not use, BTW).
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>So very true.  An example of this is that one of the games I installed 
+started in fullscreen mode so I changed the entry to add '-w' to the 
+command so it didn't.  With the freedesktop spec that would be done by 
+hunting down the .desktop file and/or copying it to the user's directory 
+so it didn't screw up everyones menu.
+
+&gt;<i>But like you say, we are building *user* menus, not system ones.
+</I>&gt;<i>Conceptually it's pretty different - Denu users see a tree of programs
+</I>&gt;<i>and shuffle things about till they're happy. They don't want to see a
+</I>&gt;<i>bunch of complex rules: it's the Gnome WM module's role to take care
+</I>&gt;<i>of translating what they see into something gnome-menus understands.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>I understand that abstraction.  I'm right with you.
+
+&gt;<i>OK, if they're for a freedesktop WM we will probably want to give the
+</I>&gt;<i>user the option to 'Add all programs in x category' and stuff like
+</I>&gt;<i>that. But do we want to extend that functionality to other WMs? I
+</I>&gt;<i>guess it would be nice, but could we? Let me think out loud...
+</I>&gt;<i>
+</I>&gt;<i>First off everything in the Denu app database would need to be
+</I>&gt;<i>categorized. We could use the info in existing .desktop files as a
+</I>&gt;<i>basis for this. Then if Denu is being used on a WM that doesn't
+</I>&gt;<i>support categorized menus, it would have to check on startup for new
+</I>&gt;<i>programs, see what category they belong to, and offer the user the
+</I>&gt;<i>choice to add them. That means it would need a way to remember the
+</I>&gt;<i>user's category -&gt; menu preferences between sessions.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>This idea of categories already exists within denu.  You can find its 
+interpreter kinda thing in the autogen function or its equivalent.  Save 
+your menu and have an empty you and click autofill.  If you were to look 
+in the database you'd see something like this, '|Net|Browsers' per 
+entry.  It defines that the entry needs to be put in the Browsers 
+sub-menu of Net.  So what we could do is use those existing definitions 
+to translate to categories.  We could also derive categories from the 
+beginning of the portage as id as I call it.  For denu this is x11-misc 
+and it could translate to the Utilities category.
+
+&gt;<i>So yeah, it's doable. But I think it would either mean reinventing
+</I>&gt;<i>most of the freedesktop system, or lifting it wholesale and using it
+</I>&gt;<i>'internally' for saving Denu's menus, then translating them into
+</I>&gt;<i>non-freedesktop menus when the user clicks 'save'.
+</I>&gt;<i>
+</I>&gt;<i>The way I see it, the pros are added functionality and leveraging an
+</I>&gt;<i>open standard, the cons are added complexity and overhead. The
+</I>&gt;<i>complexity part isn't really avoidable though, since we're parsing and
+</I>&gt;<i>saving xdg menus for Gnome and KDE anyway. But still, it's a pretty
+</I>&gt;<i>big shift, and a decision only you can make.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>The idea of promoting an open standard seems to me, flawed.  I think 
+that the freedesktop standard has flaws we've already discussed.  I also 
+hesitate to call it a standard for all WMs because as far as I know its 
+only a standard agreed upon by Gnome and KDE.  Both of which have 
+different interests than many WMs.  Gnome/KDE  seem to lean toward the 
+'all I want to do is check my email' crowd.  This is most prevalent with 
+the absence of thought about adaptability when the standard was 
+created.  A more sensible standard I believe is a simple text file with 
+a standard format, not an XML which takes info from multitudes of 
+files.  I lean toward making denu deal with the standard but not run of 
+the standard.  I say this because I believe that the Free Desktop 
+standard is unpolished and its success is undetermined.  Again I'll 
+point to Xfce4's menus, they provide the best of both worlds.  I would 
+have denu not cater to any WM especially the freedesktop spec because 
+catering to one makes it tougher for others.  It seems that the audience 
+of denu is between the 'all I want to do is check my email' user and the 
+'I'll end the text files thank you very much' user.  It aims at the 'Yes 
+I want to customize my menus but I dont want to find what I have 
+installed and what its related binaries are called.
+
+I feel that I should clarify about my role.  I may have sound harsh that 
+I wanted to be a part of it.  I'm in it for the lesson and because it 
+was an itch that needed to be scratched.  The reason I might have taken 
+too much of a this is mine dont touch stance is because I'm afraid of 
+someone more experienced than my self replacing me.  It still is my 
+program but I love the help.
+
+&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>We also need to
+</I>&gt;&gt;<i>consider the &lt;Layout&gt; tag because with the freedesktop spec order is
+</I>&gt;&gt;<i>specified by the &lt;layout&gt; tag NOT the order of the actual entries like
+</I>&gt;&gt;<i>all other WMs.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Not such a big deal - the pyxdg menu parser takes care of it for you,
+</I>&gt;<i>and the WM module can translate any changes the user makes into to
+</I>&gt;<i>required &lt;Layout&gt; tags. Leave that part to me ;)
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Something tells me you'll be writing the FD module. ;-)
+
+&gt;&gt;<i>I think that its a definite possibility.  I have near to no experience
+</I>&gt;&gt;<i>with XML and its really a matter of teaching myself.  
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>It's overhyped ;) You know what it looks like already, and
+</I>&gt;<i>manipulating it with python's minidom is pretty easy once you get the
+</I>&gt;<i>hang of it. Shout if you want some tutorial links.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Please.
+
+&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>When you say
+</I>&gt;&gt;<i>internally in XML I'm confused on what that implies.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>I was talking about the format Denu uses to save it's own version of
+</I>&gt;<i>the user's menu between sessions. Right now it's pickling the
+</I>&gt;<i>TreeStore, which works fine so long as they remain 'flat' - ie contain
+</I>&gt;<i>a fixed number of columns. Saving them in XML is more flexible - they
+</I>&gt;<i>could contain any number of 'columns' - and would mean that they could
+</I>&gt;<i>be examined and edited by anyone with a text reader, but it's only one
+</I>&gt;<i>format - there's lots of choices.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Agreed.  In fact it would great as a menu standard.  lol
+
+&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>I'm near Seattle.  I live just west, across Puget Sound from Seattle.  I
+</I>&gt;&gt;<i>realize thats pretty detailed but oh well.  
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>No, not too detailed for this ex-Vancouverite! My family moved to
+</I>&gt;<i>Sidney BC when I was eight then moved back here when I finished I
+</I>&gt;<i>school. I decided the UK was crap and went back to Vancouver. But I've
+</I>&gt;<i>bummed around the globe a bit since then, and am for some reason am
+</I>&gt;<i>back here again.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Cool.
+
+&gt;&gt;<i>How's your weather?
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>A lovely spring day. And I'm tied to my computer :(
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Ah, work?
+
+&gt;<i>Matt
+</I>&gt;<i>_______________________________________________
+</I>&gt;<i>Denu-devel mailing list
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">Denu-devel at lists.berlios.de</A>
+</I>&gt;<i><A HREF="http://lists.berlios.de/mailman/listinfo/denu-devel">http://lists.berlios.de/mailman/listinfo/denu-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>~Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000032.html">[Denu-devel] Denu in portage.
+</A></li>
+	<LI>Next message: <A HREF="000034.html">[Denu-devel] Denu 3.x Todo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#33">[ date ]</a>
+              <a href="thread.html#33">[ thread ]</a>
+              <a href="subject.html#33">[ subject ]</a>
+              <a href="author.html#33">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>

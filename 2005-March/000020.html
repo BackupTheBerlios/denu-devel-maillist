@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] RFC: Modularizing WM Functionality
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20RFC%3A%20Modularizing%20WM%20Functionality&In-Reply-To=%3C4238C94B.5060501%40comcast.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000018.html">
+   <LINK REL="Next"  HREF="000019.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] RFC: Modularizing WM Functionality</H1>
+    <B>Scott Shawcroft</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20RFC%3A%20Modularizing%20WM%20Functionality&In-Reply-To=%3C4238C94B.5060501%40comcast.net%3E"
+       TITLE="[Denu-devel] RFC: Modularizing WM Functionality">shux_linux at comcast.net
+       </A><BR>
+    <I>Thu Mar 17 01:03:23 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000018.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+        <LI>Next message: <A HREF="000019.html">[Denu-devel] Fwd: pyxdg - writing applications-merged .menu files
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matt Kynaston wrote:
+
+&gt;<i>Hi,
+</I>&gt;<i>
+</I>&gt;<i>Regarding recent discussion on how to handle all possible WMs, and now
+</I>&gt;<i>possibly panels too: these are the challenges I see:
+</I>&gt;<i>
+</I>&gt;<i>    1. Make it easy for us to maintain all the different possibilities for WMs 
+</I>&gt;<i>        and panels
+</I>&gt;<i>    2. Make it easy for 3rd parties to contribute their own WM/panel code
+</I>&gt;<i>    3. Make it possible to add a new WM to Denu without reinstalling the 
+</I>&gt;<i>        entire program
+</I>&gt;<i>    4. Make it possible for Denu to know the capabilities of a given WM/panel
+</I>&gt;<i>    5. Avoid requiring any WM-specific dependencies if a user doesn't have 
+</I>&gt;<i>        that WM installed
+</I>&gt;<i>
+</I>&gt;<i>Basically, I'd like to modularize WM management more than it is
+</I>&gt;<i>already. All of the code below is for illustrative purposes only, but
+</I>&gt;<i>here's how I've seen stuff like this done before...
+</I>&gt;<i>
+</I>&gt;<i>Create a base (or skeleton) class, WM. This contains no functionality
+</I>&gt;<i>of it's own except for creating subclasses, but defines an API that
+</I>&gt;<i>all Denu-compliant WM modules must follow. Right now, it'd look
+</I>&gt;<i>something like:
+</I>&gt;<i>
+</I>&gt;<i>class WM:
+</I>&gt;<i>&quot;&quot;&quot;Skeleton class for all WM-specific functionality&quot;&quot;&quot;
+</I>&gt;<i>
+</I>&gt;<i>    # a dictionary defining the WM's capabilities
+</I>&gt;<i>    capabilities = {}   
+</I>&gt;<i>
+</I>&gt;<i>    def __init__(self):
+</I>&gt;<i>    &quot;&quot;&quot;Initialise the WMs capabilities&quot;&quot;&quot;
+</I>&gt;<i>        self.capabilities = dict()                           # not
+</I>&gt;<i>capable of anything
+</I>&gt;<i>
+</I>&gt;<i>    def factory(type):
+</I>&gt;<i>    &quot;&quot;&quot;Returns a WM instance of given type&quot;&quot;&quot;
+</I>&gt;<i>        return eval(type + '()')
+</I>&gt;<i>    factory = staticmethod(factory)
+</I>&gt;<i>
+</I>&gt;<i>    def load(self):
+</I>&gt;<i>    &quot;&quot;&quot;Returns the existing menu&quot;&quot;&quot;
+</I>&gt;<i>        raise WMError 'Not implemented'
+</I>&gt;<i>
+</I>&gt;<i>   def save(self, menu):
+</I>&gt;<i>   &quot;&quot;&quot;Save the given menu in the WMs format
+</I>&gt;<i>       
+</I>&gt;<i>       Returns true if save was successful&quot;&quot;&quot;
+</I>&gt;<i>       raise WMError 'Not implemented'
+</I>&gt;<i>
+</I>&gt;<i>A specific WM module would comprise a single file, containing a
+</I>&gt;<i>subclass of WM. The developer would fill in the code required for the
+</I>&gt;<i>load() and save() methods and say what the WM is capable of:
+</I>&gt;<i>
+</I>&gt;<i>class Gnome(WM):
+</I>&gt;<i>&quot;&quot;&quot;Gnome-specific WM functionality&quot;&quot;&quot;
+</I>&gt;<i>
+</I>&gt;<i>    def __init__(self):
+</I>&gt;<i>        WM.__init__(self)                            # inherit default
+</I>&gt;<i>capabilities
+</I>&gt;<i>        self.capabilities['themes'] = True  # Gnome can do themes
+</I>&gt;<i>        # add other capabilities
+</I>&gt;<i>
+</I>&gt;<i>    def load(self):
+</I>&gt;<i>        menu = Menu();
+</I>&gt;<i>        # ...add  stuff to menu...
+</I>&gt;<i>        return menu
+</I>&gt;<i>
+</I>&gt;<i>    def save(self, menu):
+</I>&gt;<i>        # ...save the menu...
+</I>&gt;<i>        return True
+</I>&gt;<i>
+</I>&gt;<i>When a WM module is installed, it's capabilities are added to a Denu
+</I>&gt;<i>Registry object, which is pickled and loaded at program startup. By
+</I>&gt;<i>examing the Registry, Denu always knows which WMs (or panels) have
+</I>&gt;<i>been installed, and what each can do.
+</I>&gt;<i>
+</I>&gt;<i>Because the API is identical for all WMs, the rest of Denu doesn't
+</I>&gt;<i>need to know any more about it, all it does when it needs to perform
+</I>&gt;<i>WM-specific operations is intantiate one of the required type and call
+</I>&gt;<i>a method:
+</I>&gt;<i>
+</I>&gt;<i>    wm = WM.factory('Gnome')
+</I>&gt;<i>    wm.save(menu)
+</I>&gt;<i>
+</I>&gt;<i>Obviously there's other stuff that might need to be added to the basic
+</I>&gt;<i>WM API - getVersion() springs to mind, but I haven't a clue whether
+</I>&gt;<i>it's really needed. We'd need to iron those out, along with a list of
+</I>&gt;<i>WM capabilities that each class should define.
+</I>&gt;<i>
+</I>&gt;<i>Let me know what you think.
+</I>&gt;<i>
+</I>&gt;<i>Matt
+</I>&gt;<i>_______________________________________________
+</I>&gt;<i>Denu-devel mailing list
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">Denu-devel at lists.berlios.de</A>
+</I>&gt;<i><A HREF="http://lists.berlios.de/mailman/listinfo/denu-devel">http://lists.berlios.de/mailman/listinfo/denu-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>I'm having a tough time with this.  Why would you have a completely 
+separate class?  Why would you like it more modularized?
+~Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000018.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+	<LI>Next message: <A HREF="000019.html">[Denu-devel] Fwd: pyxdg - writing applications-merged .menu files
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>

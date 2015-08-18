@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] OK, I signed up...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20OK%2C%20I%20signed%20up...&In-Reply-To=%3C4238CE16.4060308%40comcast.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000017.html">
+   <LINK REL="Next"  HREF="000018.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] OK, I signed up...</H1>
+    <B>Scott Shawcroft</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20OK%2C%20I%20signed%20up...&In-Reply-To=%3C4238CE16.4060308%40comcast.net%3E"
+       TITLE="[Denu-devel] OK, I signed up...">shux_linux at comcast.net
+       </A><BR>
+    <I>Thu Mar 17 01:23:50 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000017.html">[Denu-devel] OK, I signed up...
+</A></li>
+        <LI>Next message: <A HREF="000018.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matt Kynaston wrote:
+
+&gt;&gt;<i>As far as I know, all of the window managers including Gnome/KDE its a
+</I>&gt;&gt;<i>matter of absolute file names in the .directory files.  We'd also have
+</I>&gt;&gt;<i>to look into supporting themes via .directory files because as of now
+</I>&gt;&gt;<i>its just done by user definition.  
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Themes, yes, grrr... pyxdg includes a theme handling class,
+</I>&gt;<i>IconTheme.py - haven't really looked at it. I guess the user will need
+</I>&gt;<i>a way (simple checkbox?) when selecting an icon to indicate whether
+</I>&gt;<i>they want it to change with the theme (in which case it's a relative
+</I>&gt;<i>path - ie 'gvim.svg') or an absolute one. Again, this will differ
+</I>&gt;<i>between WMs.
+</I>&gt;<i> 
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Yes, that would work.
+
+&gt;&gt;<i>Accelerator keys? Enlighten me.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Alt+F, Alt+S and stuff.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>Another WM I need to look into further is e17.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>That's one I _do_ have installed! The menus are directory based
+</I>&gt;<i>(everything lives in ~/.e/e/applications) but uses a binary format for
+</I>&gt;<i>each application file. Can't say I've looked at it much. I just used a
+</I>&gt;<i>bunch of prebuilt eapp binary files and tutorial at:
+</I>&gt;<i><A HREF="http://aje.codewordt.co.uk/Files_files/applications.tar.gz">http://aje.codewordt.co.uk/Files_files/applications.tar.gz</A>
+</I>&gt;<i>
+</I>&gt;<i>There's also e_utils - a bunch of utils to help create those binaries
+</I>&gt;<i>- prob should begin with those for real integration, so we're not
+</I>&gt;<i>limitted to what's in the tarball.
+</I>&gt;<i>
+</I>&gt;<i>But that raises another question that's been at the back of my head -
+</I>&gt;<i>dependencies. You don't want people to have to install e_utils if
+</I>&gt;<i>they're not going to touch e17. Same sort of thing with pyxdg, really,
+</I>&gt;<i>though it doesn't depend on anthing other than python so is prob OK.
+</I>&gt;<i>Only two ways around it though: 1) rewrite or lift all the stuff
+</I>&gt;<i>that's in them or 2) Have separate modules (with their own
+</I>&gt;<i>dependencies) for each WM.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Yes, dependencies could quickly become a problem.  Especially in the
+case of e17.  I would say that a good way of managing the deps is
+needed.  We could rewrite/lift the functions but that would enlarge denu
+and if we choose. the WM modules.
+
+&gt;<i>But back to the e17 setup - the same format and general layout is used
+</I>&gt;<i>by the applications menu, Engage and IBar. I know some people use
+</I>&gt;<i>Engage with other WMs, so once we've got it cracked, that's a couple
+</I>&gt;<i>of panels down...
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>That would be a definite plus.  I know from using engage that I would
+except the lack of easy configuration turns me off of it.
+
+&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>Do we also want to include support for
+</I>&gt;&gt;<i>panels? Ex: pypanel, fbpanel.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>I guess yes, eventually it'd be good.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>Good question.  My gut says eventually yes, but it will not be urgent.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Yeah. If I were a WM developer I'd stick with what I'd got until the
+</I>&gt;<i>dust settled a bit.
+</I>&gt;<i>
+</I>&gt;<i>Interesting what you say about power users. I know one of the things
+</I>&gt;<i>that the corporate sys admins (my brother's one) want is the ability
+</I>&gt;<i>to &quot;lock down&quot; menus, so users cannot change them. Don't think any of
+</I>&gt;<i>the menuing systems support this yet.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Seems like the freedesktop spec right now keeps it pretty locked down.
+;-)  Unless of course they go through the pain of hand editing or use denu.
+
+&gt;&gt;<i>    My response to these drawbacks was denu and it compensates for
+</I>&gt;&gt;<i>missing programs by being able to add them to denu which in turn submits
+</I>&gt;&gt;<i>it to the online database so the next time someone has the program it
+</I>&gt;&gt;<i>wont be missing.  
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Yeah, it's a great idea. Haven't even looked at how you handle this
+</I>&gt;<i>yet. Does SysUpdate query portage for installed apps, or look for
+</I>&gt;<i>binaries directly?
+</I>&gt;<i>
+</I>&gt;<i>Matt
+</I>&gt;<i>_______________________________________________
+</I>&gt;<i>Denu-devel mailing list
+</I>&gt;<i><A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">Denu-devel at lists.berlios.de</A>
+</I>&gt;<i><A HREF="http://lists.berlios.de/mailman/listinfo/denu-devel">http://lists.berlios.de/mailman/listinfo/denu-devel</A>
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Both.  The sysupdate function uses a variable ( config[&quot;portage&quot;] ) to
+know if portage exists and if it does it uses the directories in
+/var/db/pkg to find whats installed.  If portage is not found it gets a
+list of all the files within the $PATH directories and runs them up
+against a dict object which corresponds filenames to packages.  That
+dict is exec_index.p .  Are you interested in becoming a dev?  IE access
+to the svn repository and a rundown of the online dev utils.
+~Scott
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000017.html">[Denu-devel] OK, I signed up...
+</A></li>
+	<LI>Next message: <A HREF="000018.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>

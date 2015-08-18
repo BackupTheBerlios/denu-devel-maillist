@@ -1,0 +1,32 @@
+From shux_linux at comcast.net  Fri Aug 26 09:36:34 2005
+From: shux_linux at comcast.net (Shux/Tannewt)
+Date: Fri, 26 Aug 2005 00:36:34 -0700
+Subject: [Denu-devel] Denu's Status
+Message-ID: <430EC682.2030003@comcast.net>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Just wanted to send out a quick status report.  I just recently
+started to continue work on 3.x and now those changes are in
+subversion.  If you are still interested in Denu, I suggest you check
+out the berlios subversion repository 3.x is leaps and bounds ahead of
+2.x already.  3.x mainly features a better interface with drag and
+drop support along with (hopefully) more manageable code.  I'm
+currently looking for people to write window manager modules, test
+denu on other distros besides Gentoo, write documentation and maintain
+the evergrowing denu central database.  All of these positions require
+dedication and flexibility because Denu is still in constant change.
+Thanks,
+Scott
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.1 (GNU/Linux)
+Comment: Using GnuPG with Thunderbird - http://enigmail.mozdev.org
+
+iD8DBQFDDsaB10ekhar8gdURAkT0AJwIAHiATVCw9DGQmUm6l4Aky7O0cwCgvvYC
+QSDd9ByLFw8IkugcD3gDiqI=
+=wDQY
+-----END PGP SIGNATURE-----
+
+
+

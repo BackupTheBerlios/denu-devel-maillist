@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] RFC: Modularizing WM Functionality
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20RFC%3A%20Modularizing%20WM%20Functionality&In-Reply-To=%3C423A349D.5010509%40comcast.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000024.html">
+   <LINK REL="Next"  HREF="000023.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] RFC: Modularizing WM Functionality</H1>
+    <B>Scott Shawcroft</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20RFC%3A%20Modularizing%20WM%20Functionality&In-Reply-To=%3C423A349D.5010509%40comcast.net%3E"
+       TITLE="[Denu-devel] RFC: Modularizing WM Functionality">shux_linux at comcast.net
+       </A><BR>
+    <I>Fri Mar 18 02:53:33 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000024.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+        <LI>Next message: <A HREF="000023.html">[Denu-devel] =?GB2312?B?kdGTZJhigsyXoItaj1eWno3agZo=?=
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#25">[ date ]</a>
+              <a href="thread.html#25">[ thread ]</a>
+              <a href="subject.html#25">[ subject ]</a>
+              <a href="author.html#25">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matt Kynaston wrote:
+
+&gt;<i>On Wed, 16 Mar 2005 18:17:46 -0800, Scott Shawcroft
+</I>&gt;<i>&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">shux_linux at comcast.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>Alright, so the next question is what actions to we need to cover and
+</I>&gt;&gt;<i>how will the core look.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Well, there's nothing in the core right now that loads menus from the
+</I>&gt;<i>WM, only from Denu's own saved menu.
+</I>&gt;<i>
+</I>&gt;<i>I guess that needs to be addressed: if we're doing a major rewrite,
+</I>&gt;<i>will Denu continue to keep it's own version of the menu saved, or will
+</I>&gt;<i>it work natively with the menu of the currently running WM, exporting
+</I>&gt;<i>that to different formats at the user's request?
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>I think it depends on how we want to set it up.  We could have both options.
+
+&gt;<i>For BC, I think we'll need a 'Denu' WM class, that loads and saves the
+</I>&gt;<i>~/.denu/lastmenu.p. The  real question is whether there's anything to
+</I>&gt;<i>be gained by keeping our own copy of the menus in future... I suspect
+</I>&gt;<i>there is, but am not thinking well enough right now to say what it is
+</I>&gt;:|<i>
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>Also, along with this major rewrite we also
+</I>&gt;&gt;<i>should change to using glade.  Would each module be a separate package?
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Do you mean, would a WM include glade files? Might be wrong, but there
+</I>&gt;<i>shouldn't be any UI stuff attached to a WM, should there?
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>No, I was just saying that if we are rewriting we might as well do that too.
+
+&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>How would denu know what WMs are supported?
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>We need two things: a module install script, and a simple registry
+</I>&gt;<i>that gets pickled and loaded at program startup. It will contain a
+</I>&gt;<i>list of the installed WMs and their capabilities, I was thinking
+</I>&gt;<i>something like:
+</I>&gt;<i>    registry = {'Gnome' : {[stuff about gnome]}, 'FluxBox' : {[stuff
+</I>&gt;<i>about fluxbox]}}
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>I would have the registry just store the 'stuff'.  The installed WMs 
+should be detected at startup.
+
+&gt;<i>The install script is pretty simple. It:
+</I>&gt;<i>    1. instantiates the WM class
+</I>&gt;<i>    2. finds out it's name, capabilities, etc
+</I>&gt;<i>    3. copies them to the registry
+</I>&gt;<i>    4. saves the registry
+</I>&gt;<i>
+</I>&gt;<i>I could either be a separate script, or done with something like:
+</I>&gt;<i>
+</I>&gt;<i>    $ denu --install-module /path/to/wm_module.py
+</I>&gt;<i>
+</I>&gt;<i>Prob separate would be simpler, since we don't want it firing up the GUI.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Yeah, separate.
+
+&gt;<i>More suggestions for methods the WM classes might need to support
+</I>&gt;<i>(thinking out load):
+</I>&gt;<i>
+</I>&gt;<i>I think in addition to capabilities, we'll need a property called
+</I>&gt;<i>'signature'. This is the process we look for to detect if that WM is
+</I>&gt;<i>running. So for Gnome:
+</I>&gt;<i>
+</I>&gt;<i>    wm.signature = 'gnome-session'
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Yeah, definately.
+
+&gt;<i>That should also get copied to the registry on install, to avoid the
+</I>&gt;<i>overhead of instantiating every WM module at startup.
+</I>&gt;<i>
+</I>&gt;<i>We might also want:
+</I>&gt;<i>
+</I>&gt;<i>   wm.system_commands = {'About' : '[command,icon,etc]', 'Help' :
+</I>&gt;<i>'[command,etc]', ...}
+</I>&gt;<i>
+</I>&gt;<i>This could be used for populating a WM-specific 'specials' box.
+</I>&gt;<i>Doesn't need to be in the registry, though.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Or just a WM info box.
+
+&gt;<i>My method list:
+</I>&gt;<i>
+</I>&gt;<i>    wm.load()
+</I>&gt;<i>    wm.save(menu)
+</I>&gt;<i>    wm.getName()                  # needed by the installer
+</I>&gt;<i>    wm.getIconThemePath()   # would only be needed if we were going to use
+</I>&gt;<i>                                              # the current theme's
+</I>&gt;<i>own folder/app icons
+</I>&gt;<i>                                              # in Denu's UI
+</I>&gt;<i>
+</I>&gt;<i>I'll bang out a working version of the WM class along with some test
+</I>&gt;<i>scripts and send 'em over so we can start playing with it - it's
+</I>&gt;<i>always much easier to understand when there's something functioning
+</I>&gt;<i>there.
+</I>&gt;<i>
+</I>&gt;<i>I've just had a couple of small jobs crop up, though, so might not get
+</I>&gt;<i>to it until end of the weekend.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Yeah, no problems.  I would like to make sure its we because I'd love to 
+learn more.  When you want to I can hook you up as a dev.  That would 
+allow us to use the svn.  It's no absolutely critical because I think 
+we're on different time schedules so we wont be working on the code at 
+the same time.
+
+&gt;<i>I've also contacted the pyxdg developer about working together on the
+</I>&gt;<i>editing functionality for that. He's right, it's not exactly a trivial
+</I>&gt;<i>task, but helping develop that will help Denu deal with Gnome and KDE
+</I>&gt;<i>too.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Yes, that would be another good way to give back.
+
+&gt;<i>Is there any way to make <A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">denu-devel at lists.berlios.de</A> automatically
+</I>&gt;<i>make the 'Reply-To' go to the list, is there? I keep forgetting...
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>I just used reply to and deleted your email.  I don't know with gmail.
+
+&gt;<i>Matt
+</I>&gt;<i>
+</I>~Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000024.html">[Denu-devel] RFC: Modularizing WM Functionality
+</A></li>
+	<LI>Next message: <A HREF="000023.html">[Denu-devel] =?GB2312?B?kdGTZJhigsyXoItaj1eWno3agZo=?=
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#25">[ date ]</a>
+              <a href="thread.html#25">[ thread ]</a>
+              <a href="subject.html#25">[ subject ]</a>
+              <a href="author.html#25">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Denu-devel] Denu in portage.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/denu-devel/2005-March/index.html" >
+   <LINK REL="made" HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20Denu%20in%20portage.&In-Reply-To=%3C423EDCFE.2010607%40comcast.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000029.html">
+   <LINK REL="Next"  HREF="000031.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Denu-devel] Denu in portage.</H1>
+    <B>Scott Shawcroft</B> 
+    <A HREF="mailto:denu-devel%40lists.berlios.de?Subject=Re%3A%20%5BDenu-devel%5D%20Denu%20in%20portage.&In-Reply-To=%3C423EDCFE.2010607%40comcast.net%3E"
+       TITLE="[Denu-devel] Denu in portage.">shux_linux at comcast.net
+       </A><BR>
+    <I>Mon Mar 21 15:41:02 CET 2005</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000029.html">[Denu-devel] Administrative Note.
+</A></li>
+        <LI>Next message: <A HREF="000031.html">[Denu-devel] Denu in portage.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matt Kynaston wrote:
+
+&gt;<i>On Sun, 20 Mar 2005 20:03:56 -0800, Scott Shawcroft
+</I>&gt;<i>&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/denu-devel">shux_linux at comcast.net</A>&gt; wrote:
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>With that said here is a brief roadmap I
+</I>&gt;&gt;<i>had in my mind.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Sounds good.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>Also, should we explore pyxml to use with denu?
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>Definitely! If we want to be able to read in Gnome and KDE menus, it's
+</I>&gt;<i>about the only way. A chunk of the work I did last week was actually
+</I>&gt;<i>getting the menu parsing side following the standards to the letter,
+</I>&gt;<i>so that now that's passing the same regression tests as gnome-menus
+</I>&gt;<i>and kdesktop - the menus Denu would display would be exactly what the
+</I>&gt;<i>user's got.
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Awesome.  The more accurate the better.  Now we need to develop a better 
+way of denu handling the menu.
+
+&gt;<i>The editing functionality I'm adding requires pyxml. One of the weird
+</I>&gt;<i>things about python is that there's a million different XML modules,
+</I>&gt;<i>but it seems difficult to actually tell which one you're using, let
+</I>&gt;<i>alone find decent docs. I basically ended up with pyxml because I
+</I>&gt;<i>could find examples of feeding it a file and the rest follows DOM
+</I>&gt;<i>level 2 to the letter, so I could just use the specs to know what
+</I>&gt;<i>methods to use!
+</I>&gt;<i>
+</I>&gt;<i>I _think_ the only pyxml-specific functionality I'm using is for
+</I>&gt;<i>reading in the user's menu, so I might be able to switch back to the
+</I>&gt;<i>default xml.dom and get rid of that dependency. But Heinrich and I
+</I>&gt;<i>have been discussing moving away from xml.minidom in the parser for
+</I>&gt;<i>performance reasons, so I have a feeling the dependency will stay.
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>&gt;&gt;<i>Awesome, and remember I'm coding too.  Lets discuss further the overall
+</I>&gt;&gt;<i>structure and pertinant functions so that I can work on aspects too.
+</I>&gt;&gt;<i>    
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>OK.
+</I>&gt;<i>
+</I>&gt;<i>One thing I've been wondering... do applications install their
+</I>&gt;<i>.desktop files even if the user doesn't have Gnome/KDE? 
+</I>&gt;<i>
+</I>Yes I believe IF the app includes a .desktop file.  Not all do.
+
+&gt;<i>They contain a
+</I>&gt;<i>lot of useful information (i18n program name, executable, icon, etc)
+</I>&gt;<i>that might be useful for the Denu DB. If they're there on the user's
+</I>&gt;<i>system anyway, might be worth checking them during SysUpdate?
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>Very true and il8n is something we need to keep in mind for 3.x.x .
+
+&gt;<i>Matt
+</I>&gt;<i>
+</I>&gt;<i>  
+</I>&gt;<i>
+</I>~Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000029.html">[Denu-devel] Administrative Note.
+</A></li>
+	<LI>Next message: <A HREF="000031.html">[Denu-devel] Denu in portage.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#30">[ date ]</a>
+              <a href="thread.html#30">[ thread ]</a>
+              <a href="subject.html#30">[ subject ]</a>
+              <a href="author.html#30">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/denu-devel">More information about the Denu-devel
+mailing list</a><br>
+</body></html>
